@@ -126,7 +126,6 @@ public class Agora extends Location
                 talking= false;
                 talking1=false;
                 talking2=false;
-                talked = false;
                 write("\n Welcome to the agora. This is the hustling and bustling center of the city. Check it out.");
                 started = true;
             } else {
@@ -300,6 +299,7 @@ public class Agora extends Location
                     talking = true;
                 } else if ((processInput(command, "crowd") || processInput(command, "man")) && talked && inCenter && soc.isAlive()) {
                     soc.say(outScreen, "Hello fellow philosopher.");
+                    inCircle=true;
                 } else if ((processInput(command, "persuade")) && talked && inCircle && soc.isAlive()) {
                     soc.say(outScreen, "True knowledge exists in knowing that you know nothing. I'm profound.");
                 } else if ((processInput(command, "persuade")) && !talked && inCircle && soc.isAlive()) {

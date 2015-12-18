@@ -154,14 +154,19 @@ public class Forest extends Location
                 } else if ((processInput(command, "pick up") || processInput(command, "take") || processInput(command, "pick it up")) && nearOliveTree) {
                     hasSword = true;
                     player.addItem(oldSword);
-                    write("Its power is " + oldSword.getStrengthBonus() + ". You'll have to equip it if you want it's bonus.");
+                    write("Its power is " + oldSword.getStrengthBonus() + ". You'll have to equip it if you want its bonus.");
                     nearOliveTree = false;
                 } else if ((processInput(command, "leave") || processInput(command, "no") || processInput(command, "back")) && nearOliveTree) {
                     write("You go back to the clearing");
                     nearOliveTree = false;
                 } else if ((processInput(command, "olive") || processInput(command, "tree")) && hasSword) {
                     write("Just some olives.");
-                } else if (processInput(command, "flowers") && !hasElixir) {
+                }  else if ((processInput(command, "olive") && processInput(command, "eat")) && hasSword) {
+                    write("Yum.");
+                    player.setHealth(2);
+                    write("Your health has gone up 2 points!");
+
+                }else if (processInput(command, "flowers") && !hasElixir) {
                     write("There seems to be an elixir hidden among the flowers. You pick it up");
                     write("");
                     hasElixir = true;
@@ -182,9 +187,9 @@ public class Forest extends Location
                 } else if ((processInput(command, "west") || processInput(command, "footprints")) && !cyc.isAlive()) {
                     write("Eh. Let's not go back there. That cyclops probably smells by now.");
 
-                } else if ((processInput(command, "check") || processInput(command, "look")) && nearCave && cyc.isAlive()) {
+                } else if ((processInput(command, "check") || processInput(command, "look")||processInput(command,"examine")) && nearCave && cyc.isAlive()) {
                     write("There is a rumbling coming from inside the cave.");
-                } else if ((processInput(command, "check") || processInput(command, "look")) && nearCave && !cyc.isAlive()) {
+                } else if ((processInput(command, "check") || processInput(command, "look")||processInput(command,"examine")) && nearCave && !cyc.isAlive()) {
                     write("The cave has collapsed in on itself.");
                 } else if ((processInput(command, "enter") || processInput(command, "in")) && nearCave && cyc.isAlive()) {
                     write("You enter the cave and see a giant cyclops. He wields a club and looks angry. \nYou size him up and estimate his health to be " + cyc.getHealth() + " and his strength to be " + cyc.getStrength() + ".");
@@ -311,6 +316,9 @@ public class Forest extends Location
                     write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. Looking around may sometimes help.");
                 } else if (processInput(command, "kill") && processInput(command,"self")) {
                     write ("1 (800) 273-8255");
+                } else if (processInput(command,"learn")&&processInput(command, "kung fu")){
+                    player.setStrength(3);
+                    write("Your strength has increase to " +player.getStrength()+"!");
                 } else {
                     write("Not a valid command");
                 }

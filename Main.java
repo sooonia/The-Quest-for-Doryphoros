@@ -1,9 +1,5 @@
 package sample;
 
-import java.io.*;
-import java.util.ArrayList;
-import java.util.Random;
-
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
