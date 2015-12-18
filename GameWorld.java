@@ -44,7 +44,7 @@ public class GameWorld
         {
         outScreen.appendText("\nWelcome to The Quest for Doryphoros. This is a choose your own adventure style game. \n" +
                 "The goal is to find the Spear Bearer sculpture. Most of the characters you can kill, rob, or persuade. \n" +
-                "Elixirs may be used during battle with the use command. \nTo equip a weapon, just type equip followed by the name of the weapon. \nBe warned, these features are case sensitive. Try not to die.\n" +
+                "Elixirs may be used at any point in the game with the use command. \nTo equip a weapon, just type equip followed by the name of the weapon. \nType inventory to see all of your items. Type stats to see your health and strength. \nTry not to die.\n" +
                 "Good Luck! \n \n");
         outScreen.appendText("Athena: What is your name, adventurer?\n");
         nameTime = true;
@@ -54,15 +54,6 @@ public class GameWorld
             String name = command;
 
             player = new Player(outScreen, name);
-            FileWriter myWriter;
-            try {
-                myWriter = new FileWriter("characters.csv");
-                myWriter.write(name + "\n");
-
-                myWriter.close();
-            } catch (IOException e) {
-                outScreen.appendText("Whoops. Something went wrong.");
-            }
             setup = true;
             limbo.changeInLimbo();
             limbo.runLimbo(player);

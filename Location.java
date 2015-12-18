@@ -28,10 +28,6 @@ public abstract class Location  implements ProcessInput
 
     public boolean processInput(String command, String keyword)
     {
-        if (!command.contains("use")&& !command.contains("equip"))
-        {
-            command = command.toLowerCase();
-        }
         return command.contains(keyword);
 
     }
@@ -39,15 +35,17 @@ public abstract class Location  implements ProcessInput
     public boolean processInput(String command, Player player)
     {
         boolean success=true;
-        if (command.contains("use"))
+        if (command.contains("use")&&!command.contains("house"))
         {
+
+            command.toLowerCase();
             {
                 boolean found = false;
                 int i =0;
                 while (!found && i<player.getItems().size())
                 {
                     Item item = player.getItems().get(i);
-                    if (command.contains(item.itemName) && item.getClass() == Elixir.class)
+                    if (command.contains(item.itemName.toLowerCase()) && item.getClass() == Elixir.class)
                     {
                         Elixir elix = (Elixir) item;
                         elix.use(player);
@@ -70,7 +68,7 @@ public abstract class Location  implements ProcessInput
             while (!found && i<player.getItems().size())
             {
                 Item item = player.getItems().get(i);
-                if (command.contains(item.itemName) && (item.getClass() == Weapon.class))
+                if (command.contains(item.itemName.toLowerCase()) && (item.getClass() == Weapon.class))
                 {
                     player.equip((Weapon)item);
                     found = true;

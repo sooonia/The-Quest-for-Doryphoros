@@ -126,7 +126,7 @@ public class Agora extends Location
                 talking= false;
                 talking1=false;
                 talking2=false;
-                write("\n Welcome to the agora. This is the hustling and bustling center of the city. Check it out.");
+                write("\n Welcome to the agora. This is the hustling and bustling center of the city. Check it out.\n");
                 started = true;
             } else {
                 if ((processInput(command, "check") || processInput(command, "look")) && inCenter && soc.isAlive()) {
@@ -136,7 +136,7 @@ public class Agora extends Location
                 } else if ((processInput(command, "stalls") || processInput(command, "market")) && inCenter && !helped && merchant.isAlive()) {
                     inCenter = false;
                     nearStalls = true;
-                    write("You go toward the market stalls. \n There is a cute old little lady struggling to get her groceries into a cart. \n A colorfully dressed merchant is selling olive oil and bread.");
+                    write("\nYou go toward the market stalls. \n There is a cute old little lady struggling to get her groceries into a cart. \n A colorfully dressed merchant is selling olive oil and bread.");
                 } else if ((processInput(command, "stalls") || processInput(command, "market")) && inCenter && merchant.isAlive() && helped) {
                     inCenter = false;
                     nearStalls = true;
@@ -156,13 +156,14 @@ public class Agora extends Location
                 } else if ((processInput(command, "look") || processInput(command, "check")) && nearStalls && helped && !merchant.isAlive()) {
                     write("You stand near the thankful old woman. The merchant's empty stall is a little furhter up. It looks so sad.");
                 } else if ((processInput(command, "look") || processInput(command, "check")) && nearStalls && !helped && !merchant.isAlive()) {
-                    write("The old woman struggles with her groceries next to you. The merchant's empty stall is a little furhter up. It looks so sad.");
+                    write("The old woman struggles with her groceries next to you. The merchant's empty stall is a little further up. It looks so sad.");
                 }
 
                 //Dealing with Old Market Woman
                 else if (((processInput(command, "help") || processInput(command, "assist") || processInput(command, "aid")) && (processInput(command, "lady") || processInput(command, "woman"))) && nearStalls && !robAttemptOmw && !helped) {
                     omw.say(outScreen, "Thank you, dear! Take this elixir! \nAnd here's some information: that merchant sells some... secret goods. They may be useful.");
                     omw.give(blueElixir, player);
+                    blueElixir.listEffects();
                     helped = true;
                 } else if ((processInput(command, "kill") && (processInput(command, "lady") || processInput(command, "woman"))) && nearStalls) {
                     write("No. That's terrible. She's a cute little old lady. Do something else.");
@@ -170,6 +171,7 @@ public class Agora extends Location
                     robAttemptOmw = true;
                     if (player.rob(omw)) {
                         omw.say(outScreen, "You're standing awfully close to me.");
+                        weakElixir.listEffects();
                     } else {
                         omw.say(outScreen, "Thief!! Guards! Someone! Help!");
                         write("Now you've done it. Here comes a guard.");
@@ -194,7 +196,7 @@ public class Agora extends Location
                 } else if ((processInput(command, "bread") || processInput(command, "oil") || processInput(command, "buy")) && nearMerchant && merchant.isAlive()) {
                     merchant.say(outScreen, "The bread is 1 copper. 2 for the oil. I'll make you a deal though. Buy both, and I'll sell 'em to ya for only 3 coppers.");
                     merchant.say(outScreen, "... Well... I guess I can trade em to you too, but it's gotta be good. I did want to get my daughter a flute for her birthday.");
-                } else if (processInput(command, "trade") && nearMerchant && merchant.isAlive()) {
+                } else if ((processInput(command, "trade")||processInput(command,"give")||processInput(command,"exchange")||processInput(command,"flute"))&& nearMerchant && merchant.isAlive()) {
                     if (player.has("Pan's Flute")) {
                         player.give("Pan's Flute", merchant);
                         merchant.say(outScreen, "Oooh! This will do very nicely.");
@@ -305,6 +307,8 @@ public class Agora extends Location
                 } else if ((processInput(command, "persuade")) && !talked && inCircle && soc.isAlive()) {
                     soc.say(outScreen,"Teach me something... If you dare!");
 
+                } else if ((processInput(command, "rob")) && inCircle && soc.isAlive()) {
+                    soc.say(outScreen, "Such actions are not wise.");
                 } else if (processInput(command, "kill") && inCircle) {
                     player.kill(soc);
                     write("Oh no! You've killed Socrates, one of the best minds this world has ever known. Here comes a guard.");

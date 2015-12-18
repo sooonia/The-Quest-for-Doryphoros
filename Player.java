@@ -292,7 +292,6 @@ public class Player
 
         public void equip(Weapon weapon)
         {
-            Scanner in = new Scanner(System.in);
             if (weaponList.size() == 0)
             {
                 weaponList.add(weapon);

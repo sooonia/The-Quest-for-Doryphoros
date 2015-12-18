@@ -123,9 +123,11 @@ public class Forest extends Location
                 }
 
                 //Pan Quest
-                else if ((processInput(command, "man") || processInput(command, "goat")) && !panQuest && pan.isAlive() && !withPan) {
+                else if ((processInput(command, "man") || processInput(command, "goat")||processInput(command,"pan")) && !panQuest && pan.isAlive() && !withPan) {
                     withPan = true;
                     pan.say(outScreen, "You look funny. Go away.");
+                } else if ((processInput(command, "man") || processInput(command, "goat")||processInput(command,"pan")) && panQuest && pan.isAlive() && !withPan) {
+                    write("\nYou try to approach Pan, but he pulls a knife out and growls at you.\nYou decide to just stay in the clearing.");
                 } else if (processInput(command, "kill") && withPan) {
                     withPan = false;
                     player.kill(pan);
@@ -301,6 +303,9 @@ public class Forest extends Location
                     }
                 } else if (processInput(command, "inventory") || processInput(command, "items")) {
                     write(player.getItems().toString());
+                } else if (processInput(command, "stats") || processInput(command, "health")||processInput(command, "strength")) {
+                    write("Your health is " +player.getHealth()+"/"+player.getHealthMax());
+                    write("Your strength is "+player.getStrength());
                 } else if (processInput(command, player)) {
                     write("");
                 } else if (processInput(command, "leave") && processInput(command, "forest")) {
@@ -316,9 +321,10 @@ public class Forest extends Location
                     write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. Looking around may sometimes help.");
                 } else if (processInput(command, "kill") && processInput(command,"self")) {
                     write ("1 (800) 273-8255");
-                } else if (processInput(command,"learn")&&processInput(command, "kung fu")){
+                } else if (processInput(command,"learn")&&(processInput(command, "kung fu")||processInput(command,"karate"))){
+                    write("You bust out some sick new moves.");
                     player.setStrength(3);
-                    write("Your strength has increase to " +player.getStrength()+"!");
+                    write("Your strength has increased to " +player.getStrength()+"!");
                 } else {
                     write("Not a valid command");
                 }

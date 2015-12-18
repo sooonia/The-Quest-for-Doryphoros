@@ -79,8 +79,7 @@ public class PolHouse extends Location
         if (player.isAlive()) {
             if (!started) {
                 write("You go through the city to Polykleitos' home.");
-                write("");
-                write("You stand in front of a cute little house.");
+                write("You stand in front of a cute little house.\n");
                 started = true;
             } else {
 
@@ -122,7 +121,7 @@ public class PolHouse extends Location
                         player.die();
                         write("That wasn't very glamorous.");
                     }
-                } else if ((processInput(command, "ask") || processInput(command, "lost") || processInput(command, "missing") ||processInput(command, "son")) && angryPoly && inHouse && !ans1) {
+                } else if ((processInput(command, "ask") || processInput(command, "lost") || processInput(command, "missing") ||processInput(command, "son")||processInput(command,"sculpture")) && angryPoly && inHouse && !ans1) {
                     ans1=true;
                     poly.say(outScreen, "He's gone! My beautiful Spear Bearer, my perfect son. Now who will sit beside me at dinner? My NEPHEW? Oh leave me!");
                 } else if (processInput(command, "nephew") && angryPoly && inHouse) {
@@ -130,6 +129,17 @@ public class PolHouse extends Location
                     poly.say(outScreen, "He thinks he can earn my love by building that ampitheatre, HA!");
                     write("");
                     write("Maybe it's time to leave Polykleitos to his grief.");
+
+                } else if (processInput(command,"persuade")&&inHouse){
+                    poly.say(outScreen,"Thank you, but I'd prefer you ask me about some more relevant topics.");
+
+                } else if (processInput(command,"rob")&& inHouse){
+                    write("You try to rob Polykleitos, but he's looking right at you and notices. \nHe hits you with his spoon.");
+                    player.setHealth(-5);
+                    write("You have " + player.getHealth() + " health points remaining.");
+
+                } else if (processInput(command,"kill")&&inHouse){
+                    write("No. He's important");
 
                 } else if ((processInput(command, "leave") || processInput(command, "exit")) && inHouse && angryPoly) {
                     inHouse = false;
@@ -158,7 +168,7 @@ public class PolHouse extends Location
                     player.give("Olive Oil", poly);
                     poly.say(outScreen, "Thank you, but this cannot make up for my lost SON.");
 
-                } else if ((processInput(command, "son") || processInput(command, "lost") || processInput(command, "missing")) && inHouse &&!ans1) {
+                } else if ((processInput(command, "ask") || processInput(command, "lost") || processInput(command, "missing") ||processInput(command, "son")||processInput(command,"sculpture")) && inHouse &&!ans1) {
                     ans1 = true;
                     poly.say(outScreen, "He's gone! My beautiful Spear Bearer, my perfect son. Now who will sit beside me at dinner? My NEPHEW?");
                 } else if (processInput(command, "nephew") && inHouse) {
@@ -188,7 +198,7 @@ public class PolHouse extends Location
                     write(player.getItems().toString());
                 } else if (processInput(command, player)) {
                     write("");
-                } else if (processInput(command, "leave") && (processInput(command, "home") || processInput(command, "polykleitos")) || processInput(command, "house")) {
+                } else if (processInput(command, "leave") && (processInput(command, "home") || processInput(command, "polykleitos") || processInput(command, "house"))) {
                     atPolHouse = false;
 
                     write("Go to either the forest or to the agora. Or you can go back to the house.");

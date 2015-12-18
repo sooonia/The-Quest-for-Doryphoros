@@ -62,7 +62,7 @@ public class Ampitheatre extends Location
                     started = true;
                     write("A big door opens and Zeus comes flying out swinging a flaming sword. You may attack, or use an elixir. Fleeing is not an option.");
                     zeusFight = true;
-                } else if ((processInput(command, "yes") || processInput(command, "draw") || processInput(command, "sword")) && !started) {
+                } else if ((processInput(command, "yes") || processInput(command, "draw") || processInput(command, "sword")||processInput(command, "fine")) && !started) {
                     started = true;
                     write("A big door opens and a cockroach the size of your face flies at you. You may attack, or use an elixir. Fleeing is not an option.");
                     roachFight = true;
@@ -71,7 +71,6 @@ public class Ampitheatre extends Location
                     write("");
                     if (!roach.isAlive()) {
                         roachFight = false;
-                        write("You have slain the foul beast!");
                         pte.say(outScreen, "Oh no! What happened?! Where was...\nJust take it! Having it has only making my self esteem that much worse.");
                         pte.give(dory, player);
                         write("You win!!\nI didn't think you could do it, but look at that!");
