@@ -44,7 +44,11 @@ public class GameWorld
         {
         outScreen.appendText("\nWelcome to The Quest for Doryphoros. This is a choose your own adventure style game. \n" +
                 "The goal is to find the Spear Bearer sculpture. Most of the characters you can kill, rob, or persuade. \n" +
-                "Elixirs may be used at any point in the game with the use command. \nTo equip a weapon, just type equip followed by the name of the weapon. \nType inventory to see all of your items. Type stats to see your health and strength. \nTry not to die.\n" +
+                "Elixirs may be used at any point in the game with the use command followed by the name of the elixir. \n" +
+                "To equip a weapon, just type equip followed by the name of the weapon. " +
+                "\nYou can leave the location you are in by typing \"leave\" followed by your current location." +
+                "\nType inventory to see all of your items. Type stats to see your health and strength. \n" +
+                "Type help if you forget some of these commands. \nTry not to die.\n" +
                 "Good Luck! \n \n");
         outScreen.appendText("Athena: What is your name, adventurer?\n");
         nameTime = true;

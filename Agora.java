@@ -130,33 +130,33 @@ public class Agora extends Location
                 started = true;
             } else {
                 if ((processInput(command, "check") || processInput(command, "look")) && inCenter && soc.isAlive()) {
-                    write("You stand in the center of the agora. Market stalls line the streets. \nA great big temple stands tall in the center. What incredible columns it has. \nThere seems to be a big circle of people crowded around a robed man.");
+                    write("You stand in the center of the agora. Market stalls line the streets. \nA great big temple stands tall in the center. What incredible columns it has. \nThere seems to be a big circle of people crowded around a robed man.\n");
                 } else if ((processInput(command, "check") || processInput(command, "look")) && inCenter && !soc.isAlive()) {
-                    write("You stand in the center of the agora. Market stalls line the streets. \nA great big temple stands tall in the center. What incredible columns it has.");
+                    write("You stand in the center of the agora. Market stalls line the streets. \nA great big temple stands tall in the center. What incredible columns it has.\n");
                 } else if ((processInput(command, "stalls") || processInput(command, "market")) && inCenter && !helped && merchant.isAlive()) {
                     inCenter = false;
                     nearStalls = true;
-                    write("\nYou go toward the market stalls. \n There is a cute old little lady struggling to get her groceries into a cart. \n A colorfully dressed merchant is selling olive oil and bread.");
+                    write("You go toward the market stalls. \n There is a cute old little lady struggling to get her groceries into a cart. \n A colorfully dressed merchant is selling olive oil and bread.\n");
                 } else if ((processInput(command, "stalls") || processInput(command, "market")) && inCenter && merchant.isAlive() && helped) {
                     inCenter = false;
                     nearStalls = true;
-                    write("You go toward the market stalls. \n A colorfully dressed merchant is selling olive oil and bread. \n The old woman smiles at you and waves.");
+                    write("You go toward the market stalls. \n A colorfully dressed merchant is selling olive oil and bread. \n The old woman smiles at you and waves.\n");
                 } else if ((processInput(command, "stalls") || processInput(command, "market")) && inCenter && !merchant.isAlive() && helped) {
                     inCenter = false;
                     nearStalls = true;
-                    write("You go toward the market stalls. \n The old woman smiles at you and waves.");
+                    write("You go toward the market stalls. \n The old woman smiles at you and waves.\n");
                 } else if ((processInput(command, "stalls") || processInput(command, "market")) && inCenter && !helped && !merchant.isAlive()) {
                     inCenter = false;
                     nearStalls = true;
-                    write("You go toward the market stalls. \nThere is a cute old little lady struggling to get her groceries into a cart.");
+                    write("You go toward the market stalls. \nThere is a cute old little lady struggling to get her groceries into a cart.\n");
                 } else if ((processInput(command, "look") || processInput(command, "check")) && nearStalls && helped && merchant.isAlive()) {
-                    write("You stand near the thankful old woman. The merchant is a little further up selling his goods.");
+                    write("You stand near the thankful old woman. The merchant is a little further up selling his goods.\n");
                 } else if ((processInput(command, "look") || processInput(command, "check")) && nearStalls && !helped && merchant.isAlive()) {
-                    write("The old woman struggles with her groceries next to you. The merchant is a little further up selling his goods.");
+                    write("The old woman struggles with her groceries next to you. The merchant is a little further up selling his goods.\n");
                 } else if ((processInput(command, "look") || processInput(command, "check")) && nearStalls && helped && !merchant.isAlive()) {
-                    write("You stand near the thankful old woman. The merchant's empty stall is a little furhter up. It looks so sad.");
+                    write("You stand near the thankful old woman. The merchant's empty stall is a little furhter up. It looks so sad.\n");
                 } else if ((processInput(command, "look") || processInput(command, "check")) && nearStalls && !helped && !merchant.isAlive()) {
-                    write("The old woman struggles with her groceries next to you. The merchant's empty stall is a little further up. It looks so sad.");
+                    write("The old woman struggles with her groceries next to you. The merchant's empty stall is a little further up. It looks so sad.\n");
                 }
 
                 //Dealing with Old Market Woman
@@ -166,7 +166,7 @@ public class Agora extends Location
                     blueElixir.listEffects();
                     helped = true;
                 } else if ((processInput(command, "kill") && (processInput(command, "lady") || processInput(command, "woman"))) && nearStalls) {
-                    write("No. That's terrible. She's a cute little old lady. Do something else.");
+                    write("No. That's terrible. She's a cute little old lady. Do something else.\n");
                 } else if ((processInput(command, "rob") && (processInput(command, "lady") || processInput(command, "woman"))) && nearStalls && !robAttemptOmw) {
                     robAttemptOmw = true;
                     if (player.rob(omw)) {
@@ -181,21 +181,21 @@ public class Agora extends Location
                             player.removeWeapon(current);
                             player.setStrength(-1 * current.getStrengthBonus());
                         } else {
-                            guard.say(outScreen, "I've got my eye on you. You'd better stay away from the Old Woman.");
+                            guard.say(outScreen, "I've got my eye on you. You'd better stay away from the Old Woman.\n");
                         }
                     }
                 } else if ((processInput(command, "persuade") && (processInput(command, "lady") || processInput(command, "woman"))) && nearStalls) {
-                    omw.say(outScreen, "Ok friend, so here's the gossip: That Socrates is a total nightmare, real douchebag. Everyone kind of wants him dead.");
+                    omw.say(outScreen, "Ok friend, so here's the gossip: That Socrates is a total nightmare, real douchebag. Everyone kind of wants him dead.\n");
                 }
 
 
                 //Dealing with merchant
                 else if (processInput(command, "merchant") && nearStalls && !nearMerchant && merchant.isAlive()) {
-                    merchant.say(outScreen, "Greetings, citizen! I have available today the finest bread and oil in the city!");
+                    merchant.say(outScreen, "Greetings, citizen! I have available today the finest bread and oil in the city!\n");
                     nearMerchant = true;
                 } else if ((processInput(command, "bread") || processInput(command, "oil") || processInput(command, "buy")) && nearMerchant && merchant.isAlive()) {
                     merchant.say(outScreen, "The bread is 1 copper. 2 for the oil. I'll make you a deal though. Buy both, and I'll sell 'em to ya for only 3 coppers.");
-                    merchant.say(outScreen, "... Well... I guess I can trade em to you too, but it's gotta be good. I did want to get my daughter a flute for her birthday.");
+                    merchant.say(outScreen, "... Well... I guess I can trade em to you too, but it's gotta be good. I did want to get my daughter a flute for her birthday.\n");
                 } else if ((processInput(command, "trade")||processInput(command,"give")||processInput(command,"exchange")||processInput(command,"flute"))&& nearMerchant && merchant.isAlive()) {
                     if (player.has("Pan's Flute")) {
                         player.give("Pan's Flute", merchant);
@@ -203,31 +203,33 @@ public class Agora extends Location
                         merchant.give(bread, player);
                         merchant.give(oil, player);
                     } else {
-                        merchant.say(outScreen, "No, that's not a fair deal.");
+                        merchant.say(outScreen, "No, that's not a fair deal.\n");
                     }
                 } else if (processInput(command, "rob") && nearMerchant && !robAttemptMerch && merchant.isAlive()) {
                     if (player.rob(merchant)) {
                         write("");
-                        merchant.say(outScreen, "That felt funny.");
+                        merchant.say(outScreen, "That felt funny.\n");
                     } else {
-                        merchant.say(outScreen, "You do that again, and I'll have the guards cut off your hands.");
+                        merchant.say(outScreen, "You do that again, and I'll have the guards cut off your hands.\n");
                     }
+                    robAttemptMerch=true;
                 } else if (processInput(command, "rob") && nearMerchant && robAttemptMerch && merchant.isAlive()) {
-                    write("That doesn't seem like a very good idea.");
+                    write("That doesn't seem like a very good idea.\n");
                 } else if (processInput(command, "kill") && nearMerchant && merchant.isAlive()) {
                     player.kill(merchant);
                     nearMerchant = false;
-                    write("Damn it. I bet he had a family that relied on him for both financial and emotional support. Nice going.");
-                } else if (processInput(command, "persuade") && nearMerchant && merchant.isAlive()) {
+                    write("Damn it. I bet he had a family that relied on him for both financial and emotional support. Nice going.\n");
+                } else if (processInput(command, "persuade") && nearMerchant && merchant.isAlive()&& !player.has("Mysterious Powder")) {
                     merchant.say(outScreen, "How do you know about that? Look, I don't want any trouble. Just take it.");
                     merchant.give(powder, player);
-                } else if (processInput(command, "kill") && nearMerchant) {
-                    merchant.say(outScreen, "Ack! What are you doing? You better back up or it'll be your end.");
+                    write("");
+                } else if (processInput(command, "persuade") && nearMerchant && merchant.isAlive()) {
+                    merchant.say(outScreen, "I ain't got any left.\n");
                 } else if ((processInput(command, "back") || processInput(command, "center")) && nearStalls) {
                     nearStalls = false;
                     nearMerchant = false;
                     inCenter = true;
-                    write("You go back to the center of the agora.");
+                    write("You go back to the center of the agora.\n");
                 }
 
                 //Temple
@@ -235,30 +237,30 @@ public class Agora extends Location
                     inCenter = false;
                     inTemple = true;
                     write("You go up to the temple. The heavy doors swing open and you enter. \nA priest is praying to a great big scultpure of Athena. He comes over to you");
-                    priest.say(outScreen, "At long last, the gods show me favor. You have come to redeem me. Please give me that which will bring back my visions");
+                    priest.say(outScreen, "At long last, the gods show me favor. You have come to redeem me. Please give me that which will bring back my visions\n");
 
                 } else if (processInput(command, "temple") && inCenter) {
-                    write("You try to open the doors, but they will not budge.");
+                    write("You try to open the doors, but they will not budge.\n");
                 } else if (processInput(command, "temple") && !inCenter) {
-                    write("You need to go back to the center of town before you can go to the temple.");
+                    write("You need to go back to the center of town before you can go to the temple.\n");
                 } else if (processInput(command, "persuade") && inTemple) {
-                    priest.say(outScreen, "It is not flattery that I need, but for the mysteries of the gods to reveal themselves to me once more.");
+                    priest.say(outScreen, "It is not flattery that I need, but for the mysteries of the gods to reveal themselves to me once more.\n");
                 } else if (processInput(command, "kill") && inTemple) {
                     priest.say(outScreen, "Fine! Take me out of this cruel world. There is no place for me here anyway.");
                     priest.die();
                     inTemple = false;
-                    write("You nonchalantly leave the temple. Just killed a man. No big deal.");
+                    write("You nonchalantly leave the temple. Just killed a man. No big deal.\n");
                 } else if (processInput(command, "rob") && inTemple) {
                     if (!robAttemptPriest) {
                         robAttemptPriest = true;
                         if (player.rob(priest)) {
                             write("Its strength is " + heroSword.getStrengthBonus());
-                            priest.say(outScreen, "Take it, cruel gods! I don't even care.");
+                            priest.say(outScreen, "Take it, cruel gods! I don't even care.\n");
                         } else {
-                            priest.say(outScreen, "Hey, man, don't be stealing my stuff.");
+                            priest.say(outScreen, "Hey, man, don't be stealing my stuff.\n");
                         }
                     } else {
-                        priest.say(outScreen, "Get away from here. Just leave if you do not wish to aid me!");
+                        priest.say(outScreen, "Get away from here. Just leave if you do not wish to aid me!\n");
                     }
                 } else if (processInput(command, "give") && inTemple && !hasSword) {
                     if (processInput(command, "powder") && player.has("Mysterious Powder")) {
@@ -270,9 +272,9 @@ public class Agora extends Location
                         gavePowder = true;
                         inTemple = false;
                         inCenter = true;
-                        write("You exit the temple and go back to the center of the agora.");
+                        write("You exit the temple and go back to the center of the agora.\n");
                     } else {
-                        priest.say(outScreen, "NO, NO, NO! Why do you mock me so?!");
+                        priest.say(outScreen, "NO, NO, NO! Why do you mock me so?!\n");
                     }
                 } else if (processInput(command, "give") && inTemple && hasSword) {
                     if (processInput(command, "powder") && player.has("Mysterious Powder")) {
@@ -281,14 +283,14 @@ public class Agora extends Location
                         gavePowder = true;
                         inTemple = false;
                         inCenter = true;
-                        write("You exit the temple and go back to the center of the agora.");
+                        write("You exit the temple and go back to the center of the agora.\n");
                     } else {
-                        priest.say(outScreen, "NO, NO, NO! Why do you mock me so?!");
+                        priest.say(outScreen, "NO, NO, NO! Why do you mock me so?!\n");
                     }
                 } else if ((processInput(command, "leave") || processInput(command, "exit") || processInput(command, "back")) && inTemple) {
                     inTemple = false;
                     inCenter = true;
-                    write("You go back to the center of the agora.");
+                    write("You go back to the center of the agora.\n");
                 }
 
                 //Socrates
@@ -300,15 +302,15 @@ public class Agora extends Location
                     talking1 = true;
                     talking = true;
                 } else if ((processInput(command, "crowd") || processInput(command, "man")) && talked && inCenter && soc.isAlive()) {
-                    soc.say(outScreen, "Hello fellow philosopher.");
+                    soc.say(outScreen, "Hello fellow philosopher.\n");
                     inCircle=true;
                 } else if ((processInput(command, "persuade")) && talked && inCircle && soc.isAlive()) {
-                    soc.say(outScreen, "True knowledge exists in knowing that you know nothing. I'm profound.");
+                    soc.say(outScreen, "True knowledge exists in knowing that you know nothing. I'm profound.\n");
                 } else if ((processInput(command, "persuade")) && !talked && inCircle && soc.isAlive()) {
-                    soc.say(outScreen,"Teach me something... If you dare!");
+                    soc.say(outScreen,"Teach me something... If you dare!\n");
 
                 } else if ((processInput(command, "rob")) && inCircle && soc.isAlive()) {
-                    soc.say(outScreen, "Such actions are not wise.");
+                    soc.say(outScreen, "Such actions are not wise.\n");
                 } else if (processInput(command, "kill") && inCircle) {
                     player.kill(soc);
                     write("Oh no! You've killed Socrates, one of the best minds this world has ever known. Here comes a guard.");
@@ -320,7 +322,7 @@ public class Agora extends Location
                     talking1=false;
                     talking=false;
                     talking2=false;
-                    write("Well look at that. ");
+                    write("Well look at that.");
 
                     if (player.getForestQuest() && player.getPolQuest()) {
                         write("You have completed the last quest. Congratulations. Now go get that sculpture!!");
@@ -339,11 +341,15 @@ public class Agora extends Location
                     talking1 = false;
                     talking2 = false;
                     talked = true;
-                    soc.say(outScreen, "Why yes, I see that. This is a whole new level of depth. You are wise beyond your years.");
+                    soc.say(outScreen, "Why yes, I see that. This is a whole new level of depth. You are wise beyond your years.\n");
                     soc.give(wisdom, player);
 
-                } else if (processInput(command, "back") && inCircle) {
+                } else if ((processInput(command, "back")||processInput(command,"center")) && inCircle) {
                     inCircle = false;
+                    talking = false;
+                    talking1=false;
+                    inCenter=true;
+                    write("You go back to the center of the agora.\n");
                 } else if (inCircle && talking1) {
                     soc.say(outScreen, "But what does that even mean? What does it mean to be anything?");
                     talking1 = false;
@@ -354,6 +360,9 @@ public class Agora extends Location
                     talking2 = false;
                 } else if (processInput(command, "inventory") || processInput(command, "items")) {
                     write(player.getItems().toString());
+                } else if (processInput(command, "stats") || processInput(command, "health")||processInput(command, "strength")) {
+                    write("Your health is " +player.getHealth()+"/"+player.getHealthMax());
+                    write("Your strength is "+player.getStrength());
                 } else if (processInput(command, player)) {
                     write("");
                 } else if (processInput(command, "leave") && processInput(command, "agora")) {
@@ -363,15 +372,18 @@ public class Agora extends Location
                     limbo.changeInLimbo();
 
                 } else if (processInput(command, "yay")) {
-                    write("I'm glad you're happy.");
+                    write("I'm glad you're happy.\n");
                 } else if (processInput(command, "thank you")) {
-                    write("You're welcome.");
+                    write("You're welcome.\n");
                 } else if (processInput(command, "help") || processInput(command, "instructions")) {
-                    write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. Looking around may sometimes help.");
+                    write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. \nLooking around may sometimes help.\n" +
+                    "To equip a weapon, just type \"equip\" followed by the name of the weapon.\n" +
+                            "You can leave the location you are in by typing \"leave\" followed by your current location.\n" +
+                            "Type inventory to see all of your items. Type stats to see your health and strength. \n\n");
                 } else if (processInput(command, "kill") && processInput(command,"self")) {
-                    write ("1 (800) 273-8255");
+                    write ("1 (800) 273-8255\n");
                 }else {
-                    write("Not a valid command");
+                    write("Not a valid command\n");
                 }
             }
         }

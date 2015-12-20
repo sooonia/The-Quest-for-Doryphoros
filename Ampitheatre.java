@@ -89,6 +89,9 @@ public class Ampitheatre extends Location
                     write("There is nowhere to flee to.");
                 } else if (processInput(command, "inventory") || processInput(command, "items")) {
                     write(player.getItems().toString());
+                } else if (processInput(command, "stats") || processInput(command, "health")||processInput(command, "strength")) {
+                    write("Your health is " +player.getHealth()+"/"+player.getHealthMax());
+                    write("Your strength is "+player.getStrength());
                 } else if (processInput(command, player)) {
                     write("");
                 } else {

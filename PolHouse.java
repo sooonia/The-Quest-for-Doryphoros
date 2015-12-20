@@ -79,7 +79,7 @@ public class PolHouse extends Location
         if (player.isAlive()) {
             if (!started) {
                 write("You go through the city to Polykleitos' home.");
-                write("You stand in front of a cute little house.\n");
+                write("You stand outside of the cute little house. The sculptor must be inside.\n ");
                 started = true;
             } else {
 
@@ -92,19 +92,19 @@ public class PolHouse extends Location
                 }
                 //Getting inside the house without bread
                 else if ((processInput(command, "path") || (processInput(command, "go") && (processInput(command, "back") || processInput(command, "behind")))) && !inBack && !inHouse) {
-                    write("You go behind the house");
+                    write("You go behind the house.\n");
                     inBack = true;
-                } else if ((processInput(command, "knock") || processInput(command, "enter") || processInput(command, "in ")) && !inHouse && !inBack && !player.has("Bread")) {
-                    poly.say(outScreen, "No! No one is allowed inside until I have my Dory back!");
+                } else if ((processInput(command, "knock") || processInput(command, "enter") || processInput(command, "in")) && !inHouse && !inBack && !player.has("Bread")) {
+                    poly.say(outScreen, "No! No one is allowed inside until I have my Dory back!\n");
                 } else if ((processInput(command, "look around") || processInput(command, "check")) && !inHouse && !inBack) {
                     write("The door seems to be firmly locked. I thought this was a culture of hospitality. \nThen again, what sort of guest does not even bring something for his host's table.");
-                    write("You also notice a little path that leads around the house and into the backyard.");
+                    write("You also notice a little path that leads around the house and into the backyard.\n");
 
                 } else if ((processInput(command, "back") || processInput(command, "front")) && inBack) {
                     inBack = false;
-                    write("You go back to the front.");
+                    write("You go back to the front.\n");
                 } else if ((processInput(command, "look around") || processInput(command, "check")) && !inHouse && inBack) {
-                    write("There is a window that may be juuuust big enough to climb through.");
+                    write("There is a window that may be juuuust big enough to climb through.\n");
                 } else if ((processInput(command, "climb") || processInput(command, "window")) && inBack && !inHouse) {
                     inBack = false;
                     inHouse = true;
@@ -115,31 +115,38 @@ public class PolHouse extends Location
                         player.setHealth(-9);
                         write("Polykleitos hits you with a wooden spoon.");
                         write("You have " + player.getHealth() + " health points remaining.");
-                        write("Polykleitos then bursts to tears, wailing about his lost SON.");
+                        write("Polykleitos then bursts to tears, wailing about his lost SON.\n");
                     } catch (ArithmeticException exc) {
                         write("Polykleitos hits you with a wooden spoon.");
                         player.die();
-                        write("That wasn't very glamorous.");
+                        write("That wasn't very glamorous.\n");
                     }
-                } else if ((processInput(command, "ask") || processInput(command, "lost") || processInput(command, "missing") ||processInput(command, "son")||processInput(command,"sculpture")) && angryPoly && inHouse && !ans1) {
+                } else if ((processInput(command, "ask") || processInput(command, "lost") || processInput(command, "missing") ||
+                        processInput(command, "son")||processInput(command,"sculpture")|| processInput(command,"statue")) && angryPoly && inHouse && !ans1) {
                     ans1=true;
-                    poly.say(outScreen, "He's gone! My beautiful Spear Bearer, my perfect son. Now who will sit beside me at dinner? My NEPHEW? Oh leave me!");
+                    poly.say(outScreen, "He's gone! My beautiful Spear Bearer, my perfect son. Now who will sit beside me at dinner? My NEPHEW? Oh leave me!\n");
                 } else if (processInput(command, "nephew") && angryPoly && inHouse) {
                     poly.say(outScreen, "Yes, Polykleitos the Younger, my good-for-nothing nephew. Not nearly as good as my real son. Never will be.");
                     poly.say(outScreen, "He thinks he can earn my love by building that ampitheatre, HA!");
                     write("");
-                    write("Maybe it's time to leave Polykleitos to his grief.");
+                    write("Maybe it's time to leave Polykleitos to his grief.\n");
 
                 } else if (processInput(command,"persuade")&&inHouse){
-                    poly.say(outScreen,"Thank you, but I'd prefer you ask me about some more relevant topics.");
+                    poly.say(outScreen,"Thank you, but I'd prefer you ask me about some more relevant topics like my SON or NEPHEW.\n");
 
                 } else if (processInput(command,"rob")&& inHouse){
                     write("You try to rob Polykleitos, but he's looking right at you and notices. \nHe hits you with his spoon.");
-                    player.setHealth(-5);
-                    write("You have " + player.getHealth() + " health points remaining.");
+                    try{
+                        player.setHealth(-5);
+                        write("You have " + player.getHealth() + " health points remaining.\n");
+                    } catch (ArithmeticException exc){
+                        player.die();
+                        write("That wasn't very glamorous.\n");
+                    }
+
 
                 } else if (processInput(command,"kill")&&inHouse){
-                    write("No. He's important");
+                    write("No. He's important\n");
 
                 } else if ((processInput(command, "leave") || processInput(command, "exit")) && inHouse && angryPoly) {
                     inHouse = false;
@@ -166,7 +173,7 @@ public class PolHouse extends Location
                     poly.say(outScreen, "... You brought bread and oil? Well, come sit down at least. Let us break bread and talk.");
                     player.give("Bread", poly);
                     player.give("Olive Oil", poly);
-                    poly.say(outScreen, "Thank you, but this cannot make up for my lost SON.");
+                    poly.say(outScreen, "Thank you, but this cannot make up for my lost SON.\n");
 
                 } else if ((processInput(command, "ask") || processInput(command, "lost") || processInput(command, "missing") ||processInput(command, "son")||processInput(command,"sculpture")) && inHouse &&!ans1) {
                     ans1 = true;
@@ -196,6 +203,9 @@ public class PolHouse extends Location
 
                 } else if (processInput(command, "inventory") || processInput(command, "items")) {
                     write(player.getItems().toString());
+                } else if (processInput(command, "stats") || processInput(command, "health")||processInput(command, "strength")) {
+                    write("Your health is " +player.getHealth()+"/"+player.getHealthMax());
+                    write("Your strength is "+player.getStrength());
                 } else if (processInput(command, player)) {
                     write("");
                 } else if (processInput(command, "leave") && (processInput(command, "home") || processInput(command, "polykleitos") || processInput(command, "house"))) {
@@ -211,7 +221,10 @@ public class PolHouse extends Location
                 } else if (processInput(command, "kill") && processInput(command,"self")) {
                     write ("1 (800) 273-8255");
                 }else if (processInput(command, "help") || processInput(command, "instructions")) {
-                    write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. Looking around may sometimes help.");
+                    write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. \nLooking around may sometimes help.\n" +
+                            "To equip a weapon, just type \"equip\" followed by the name of the weapon.\n" +
+                            "You can leave the location you are in by typing \"leave\" followed by your current location.\n" +
+                            "Type inventory to see all of your items. Type stats to see your health and strength. \n\n");
                 } else {
                     write("Not a valid command");
                 }

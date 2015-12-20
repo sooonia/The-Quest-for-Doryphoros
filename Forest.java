@@ -40,6 +40,7 @@ public class Forest extends Location
     boolean cyc2Fight;
     boolean wasClever;
     boolean gettingName;
+    boolean learned;
 
 
     public Forest(TextArea outScreen, String command, Limbo limbo)
@@ -82,6 +83,7 @@ public class Forest extends Location
         cyc2Fight=false;
         wasClever = false;
         gettingName = false;
+        learned = false;
 
     }
 
@@ -102,32 +104,32 @@ public class Forest extends Location
                 inCave=false;
                 cyc1Fight=false;
                 cyc2Fight=false;
-                write("\nWelcome to the forest. Feel free to look around.");
+                write("\nWelcome to the forest. Feel free to look around.\n");
                 inForest2 = true;
             } else {
                 if (processInput(command, "look around") && pan.isAlive() && !panQuest) {
-                    write("You are currently in a little clearing. \nThere is a pretty olive tree and some flowers. \n" +
-                            "There are some big footprints going west. \n" +
-                            "There is also a little man with goat legs playing the fiddle");
+                    write("You are currently in a little clearing. \nThere is a pretty olive tree and some flowers.\n" +
+                            "There are some big footprints going west.\n" +
+                            "There is also a little man with goat legs playing the fiddle\n");
                 } else if (processInput(command, "look around")) {
-                    write("You are currently in a little clearing. \n" +
-                            "There is a pretty olive tree and some flowers. \n" +
-                            "There are some big footprints going west.");
+                    write("You are currently in a little clearing.\n" +
+                            "There is a pretty olive tree and some flowers.\n" +
+                            "There are some big footprints going west.\n");
                 } else if (gettingName) {
                     tempName = command;
                     gettingName = false;
                     if (tempName.toLowerCase().equals("no one") || tempName.toLowerCase().equals("nobody")) {
                         wasClever = true;
                     }
-                    cyc.say(outScreen, "Have you brought me a gift of wine, " + tempName + "? I really like wine. If it is good wine I may not kill you.");
+                    cyc.say(outScreen, "Have you brought me a gift of wine, " + tempName + "? I really like wine. If it is good wine I may not kill you.\n");
                 }
 
                 //Pan Quest
                 else if ((processInput(command, "man") || processInput(command, "goat")||processInput(command,"pan")) && !panQuest && pan.isAlive() && !withPan) {
                     withPan = true;
-                    pan.say(outScreen, "You look funny. Go away.");
+                    pan.say(outScreen, "You look funny. Go away.\n");
                 } else if ((processInput(command, "man") || processInput(command, "goat")||processInput(command,"pan")) && panQuest && pan.isAlive() && !withPan) {
-                    write("\nYou try to approach Pan, but he pulls a knife out and growls at you.\nYou decide to just stay in the clearing.");
+                    write("You try to approach Pan, but he pulls a knife out and growls at you.\nYou decide to just stay in the clearing.\n");
                 } else if (processInput(command, "kill") && withPan) {
                     withPan = false;
                     player.kill(pan);
@@ -135,47 +137,45 @@ public class Forest extends Location
                     if (player.rob(pan)) ;
                     {
                         pan.say(outScreen, "Hey! I saw that. Get out of here before I really get angry");
-                        write("");
-                        write("You hurry back to the clearing.");
+                        write("You hurry back to the clearing.\n");
                         panQuest = true;
                         withPan = false;
                         withPan = false;
                     }
                 } else if (processInput(command, "persuade") && withPan) {
-                    pan.say(outScreen, "Aw, shucks. You're making me blush, " + player.name + ". \n Look, if you're here to fight the cyclops check for a sword under the olive tree");
+                    pan.say(outScreen, "Aw, shucks. You're making me blush, " + player.name + ". \n Look, if you're here to fight the cyclops check for a sword under the olive tree\n");
                 } else if ((processInput(command, "away") || processInput(command, "go") || processInput(command, "leave") || processInput(command, "back")) && withPan) {
-                    write("You have left Pan and gone back to the clearing. Feel free to come back");
+                    write("You have left Pan and gone back to the clearing. Feel free to come back\n");
                     withPan = false;
                 }
 
                 //Getting Items
                 else if ((processInput(command, "tree") || processInput(command, "olive")) && !hasSword) {
                     write("");
-                    write("There is an old sword underneath the tree. It may be useful. Try picking it up.");
+                    write("There is an old sword underneath the tree. It may be useful. Try picking it up.\n");
                     nearOliveTree = true;
                 } else if ((processInput(command, "pick up") || processInput(command, "take") || processInput(command, "pick it up")) && nearOliveTree) {
                     hasSword = true;
                     player.addItem(oldSword);
-                    write("Its power is " + oldSword.getStrengthBonus() + ". You'll have to equip it if you want its bonus.");
+                    write("Its power is " + oldSword.getStrengthBonus() + ". You'll have to equip it if you want its bonus.\n");
                     nearOliveTree = false;
                 } else if ((processInput(command, "leave") || processInput(command, "no") || processInput(command, "back")) && nearOliveTree) {
-                    write("You go back to the clearing");
+                    write("You go back to the clearing\n");
                     nearOliveTree = false;
                 } else if ((processInput(command, "olive") || processInput(command, "tree")) && hasSword) {
-                    write("Just some olives.");
+                    write("Just some olives.\n");
                 }  else if ((processInput(command, "olive") && processInput(command, "eat")) && hasSword) {
                     write("Yum.");
                     player.setHealth(2);
-                    write("Your health has gone up 2 points!");
+                    write("Your health has gone up 2 points!\n");
 
                 }else if (processInput(command, "flowers") && !hasElixir) {
-                    write("There seems to be an elixir hidden among the flowers. You pick it up");
-                    write("");
+                    write("There seems to be an elixir hidden among the flowers. You pick it up\n");
                     hasElixir = true;
                     player.addItem(superElixir);
                     superElixir.listEffects();
                 } else if (processInput(command, "flowers") && hasElixir) {
-                    write("Pretty flowers.");
+                    write("Pretty flowers.\n");
                 }
 
                 //Following the Cyclops
@@ -183,64 +183,62 @@ public class Forest extends Location
                 else if ((processInput(command, "west") || processInput(command, "footprints")) && cyc.isAlive()) {
                     write("");
                     nearCave = true;
-                    write("You go west after the footprints. \n");
+                    write("You go west after the footprints.");
 
-                    write("You happen upon a cave.");
+                    write("You happen upon a cave.\n");
                 } else if ((processInput(command, "west") || processInput(command, "footprints")) && !cyc.isAlive()) {
-                    write("Eh. Let's not go back there. That cyclops probably smells by now.");
+                    write("Eh. Let's not go back there. That cyclops probably smells by now.\n");
 
                 } else if ((processInput(command, "check") || processInput(command, "look")||processInput(command,"examine")) && nearCave && cyc.isAlive()) {
-                    write("There is a rumbling coming from inside the cave.");
+                    write("There is a rumbling coming from inside the cave.\n");
                 } else if ((processInput(command, "check") || processInput(command, "look")||processInput(command,"examine")) && nearCave && !cyc.isAlive()) {
-                    write("The cave has collapsed in on itself.");
+                    write("The cave has collapsed in on itself.\n");
                 } else if ((processInput(command, "enter") || processInput(command, "in")) && nearCave && cyc.isAlive()) {
                     write("You enter the cave and see a giant cyclops. He wields a club and looks angry. \nYou size him up and estimate his health to be " + cyc.getHealth() + " and his strength to be " + cyc.getStrength() + ".");
-                    cyc.say(outScreen, "You who enter my cave. Who are you?");
+                    cyc.say(outScreen, "You who enter my cave. Who are you?\n");
                     if (player.has("Wisdom")) {
-                        write("Your wisdom speaks to you: perhaps you should say that you are \"no one\".");
+                        write("Your wisdom speaks to you: perhaps you should say that you are \"no one\".\n");
                     }
                     gettingName = true;
                     nearCave = false;
                     inCave = true;
                 } else if ((processInput(command, "enter") || processInput(command, "in")) && nearCave && !cyc.isAlive()) {
-                    write("The cave has collapsed in on itself.");
+                    write("The cave has collapsed in on itself.\n");
                 } else if (processInput(command, "back") && nearCave) {
                     nearCave = false;
-                    write("You go back to the clearing.");
+                    write("You go back to the clearing.\n");
                 } else if ((processInput(command, "wine") || processInput(command, "give") || processInput(command, "yes")) && inCave) {
                     if (player.give("Magic Wine", cyc)) {
                         wine.use(outScreen, cyc);
+                        write("His health went down!");
                         cyc.say(outScreen, "That tasted funny. " + tempName + " is trying to kill me!!");
                         cyc1Fight = true;
                         write("The Cyclops yelled this pretty loudly. Hopefully no one heard.");
-                        write("");
-                        write("The Cyclops rushes toward you. attack, flee or use an elixir.");
+                        write("The Cyclops rushes toward you. attack, flee or use an elixir.\n");
                     }
                 } else if ((processInput(command, "back") || processInput(command, "leave") || processInput(command, "exit")) && inCave && !cyc1Fight) {
                     inCave = false;
                     nearCave = true;
-                    write("You are outside the cave.");
+                    write("You are outside the cave.\n");
 
                     if (!cyc.isAlive() && nearCave && !wasClever) {
                         write("There is an even bigger cyclops waiting for you outside of the cave! You just cannot catch a break today. He looks pretty unhappy.");
                         cyc2.say(outScreen, "You killed my brother, mortal!");
-                        write("He rushes toward you. Attack, use an elixir, or flee.");
+                        write("He rushes toward you. Attack, use an elixir, or flee.\n");
                         cyc2Fight = true;
                     }
                 } else if (inCave && !cyc1Fight && cyc.isAlive()) {
                     cyc1Fight = true;
-                    cyc.say(outScreen, tempName + " has snuck into my cave and wishes to attack me!!! \n");
+                    cyc.say(outScreen, tempName + " has snuck into my cave and wishes to attack me!!!");
                     write("The Cyclops yelled this pretty loudly. Hopefully no one heard.");
-                    write("");
-                    write("The Cyclops rushes toward you. attack, flee or use an elixir.");
+                    write("The Cyclops rushes toward you. attack, flee or use an elixir.\n");
                 } else if (processInput(command, "attack") && cyc1Fight && cyc.isAlive()) {
                     player.fight(cyc);
-                    write("");
                     if (!cyc.isAlive()) {
                         cyc1Fight = false;
                         write("The club's power is " + club.strengthBonus + ".");
                         if (!wasClever) {
-                            write("Please exit the cave.");
+                            write("Please exit the cave.\n");
                         }
 
                         else {
@@ -268,8 +266,9 @@ public class Forest extends Location
                     if (player.flee(cyc)) {
                         inCave = false;
                         nearCave = true;
-                        write("You are no back outside of the cave.");
+                        write("You are now back outside of the cave.\n");
                         cyc1Fight = false;
+                        cyc.setHealth(10);
                     }
                 } else if (processInput(command, "attack") && cyc2Fight && cyc2.isAlive()) {
                     player.fight(cyc2);
@@ -303,9 +302,11 @@ public class Forest extends Location
                     }
                 } else if (processInput(command, "inventory") || processInput(command, "items")) {
                     write(player.getItems().toString());
+                    write("");
                 } else if (processInput(command, "stats") || processInput(command, "health")||processInput(command, "strength")) {
                     write("Your health is " +player.getHealth()+"/"+player.getHealthMax());
                     write("Your strength is "+player.getStrength());
+                    write("");
                 } else if (processInput(command, player)) {
                     write("");
                 } else if (processInput(command, "leave") && processInput(command, "forest")) {
@@ -318,15 +319,19 @@ public class Forest extends Location
                 } else if (processInput(command, "thank you")) {
                     write("You're welcome.");
                 } else if (processInput(command, "help") || processInput(command, "instructions")) {
-                    write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. Looking around may sometimes help.");
+                    write("Remember, when you're talking to a character in the game, you can rob, persuade, or kill them. \nLooking around may sometimes help.\n" +
+                            "To equip a weapon, just type \"equip\" followed by the name of the weapon.\n" +
+                            "You can leave the location you are in by typing \"leave\" followed by your current location.\n" +
+                            "Type inventory to see all of your items. Type stats to see your health and strength. \n\n");
                 } else if (processInput(command, "kill") && processInput(command,"self")) {
-                    write ("1 (800) 273-8255");
-                } else if (processInput(command,"learn")&&(processInput(command, "kung fu")||processInput(command,"karate"))){
+                    write ("1 (800) 273-8255\n");
+                } else if (processInput(command,"learn")&&(processInput(command, "kung fu")||processInput(command,"karate"))&&!learned){
                     write("You bust out some sick new moves.");
                     player.setStrength(3);
-                    write("Your strength has increased to " +player.getStrength()+"!");
+                    write("Your strength has increased to " +player.getStrength()+"!\n");
+                    learned = true;
                 } else {
-                    write("Not a valid command");
+                    write("Not a valid command\n");
                 }
 
             }
